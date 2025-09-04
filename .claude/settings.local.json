@@ -24,7 +24,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(git push:*)",
-      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\client/**)"
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\client/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\server/**)"
     ],
     "deny": [],
     "ask": []

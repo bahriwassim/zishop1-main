@@ -1,0 +1,53 @@
+workflows:
+  ios-test-only:
+    name: iOS Test Build Only
+    max_build_duration: 15
+    instance_type: mac_mini_m1
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+    environment:
+      node: 20
+    scripts:
+      - name: Environment check
+        script: |
+          node --version
+          npm --version
+          echo "Working in: $(pwd)"
+          ls -la
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Build web app
+        script: |
+          npm run build
+          echo "Build success! Listing dist:"
+          ls -la dist/public/
+      - name: Install Capacitor
+        script: |
+          npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/ios@latest
+      - name: Add iOS platform
+        script: |
+          npx cap add ios
+          echo "iOS platform added. Contents:"
+          ls -la ios/
+          echo "App folder contents:"
+          ls -la ios/App/
+      - name: Simple success test
+        script: |
+          echo "✅ SUCCESS! iOS platform created successfully!"
+          echo "This proves the workflow works."
+          echo "Next step: Enable full Xcode build."
+    artifacts:
+      - dist/public/**
+      - ios/**
+    publishing:
+      email:
+        recipients:
+          - bahriwass@gmail.com
+        notify:
+          success: true
+          failure: true

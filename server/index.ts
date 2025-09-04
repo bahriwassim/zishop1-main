@@ -13,29 +13,19 @@ const PORT = parseInt(process.env.PORT || "5000");
 
 const app = express();
 
-// Configuration de sécurité avec Helmet
+// Configuration de sécurité avec Helmet - Mode permissif pour production HTTP
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'"],
-      scriptSrc: ["'self'", "'unsafe-eval'", "'unsafe-inline'"],
-      imgSrc: ["'self'", "data:", "https:", "blob:"],
-      connectSrc: ["'self'", "ws:", "wss:", "https:", "http:"],
-      fontSrc: ["'self'", "data:", "https:"],
-      objectSrc: ["'none'"],
-      mediaSrc: ["'self'"],
-      frameSrc: ["'self'"],
-    },
-  },
+  contentSecurityPolicy: false, // Désactiver CSP pour éviter les erreurs SSL
+  crossOriginOpenerPolicy: false, // Désactiver COOP 
   crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: false,
 }));
 
 // Configuration CORS sécurisée
 const corsOptions = {
   origin: isDev 
     ? ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:5000', 'http://127.0.0.1:3000', 'http://127.0.0.1:3001', 'http://127.0.0.1:5000']
-    : ['https://zishop.co', 'https://www.zishop.co'],
+    : ['https://zishop.co', 'https://www.zishop.co', 'http://66.29.155.41:5000'],
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],

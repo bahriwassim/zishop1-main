@@ -56,11 +56,20 @@ workflows:
           pod install
       - name: Test build (simulator)
         script: |
-          cd ios
-          if [ -f "App.xcworkspace" ]; then
+          echo "Looking for Xcode files..."
+          find ios -name "*.xcworkspace" -o -name "*.xcodeproj" | head -5
+          
+          cd ios/App
+          if [ -d "App.xcworkspace" ]; then
+            echo "Using workspace build..."
             xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 14' build
-          else
+          elif [ -d "App.xcodeproj" ]; then
+            echo "Using project build..."
             xcodebuild -project App.xcodeproj -scheme App -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 14' build
+          else
+            echo "No Xcode project found! Listing contents:"
+            ls -la
+            exit 1
           fi
     artifacts:
       - ios/**/*.app
