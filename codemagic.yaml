@@ -6,61 +6,50 @@ workflows:
     triggering:
       events:
         - push
-        - pull_request
       branch_patterns:
         - pattern: master
           include: true
     environment:
-      ios_signing:
-        distribution_type: development
-        bundle_identifier: com.startindev.zishop
       vars:
-        XCODE_WORKSPACE: "ios/App.xcworkspace"
-        XCODE_SCHEME: "App"
+        BUNDLE_ID: com.startindev.zishop
       node: 18
       cocoapods: default
     scripts:
-      - name: Install npm dependencies
+      - name: Install dependencies
         script: |
-          npm ci
-      - name: Build web application
+          npm install
+      - name: Build web app
         script: |
           npm run build
       - name: Install Capacitor CLI
         script: |
           npm install -g @capacitor/cli@latest
-      - name: Initialize iOS platform
+      - name: Add iOS platform
         script: |
-          npx cap add ios || echo "iOS platform already exists"
+          npx cap add ios
       - name: Sync Capacitor
         script: |
           npx cap sync ios
-      - name: Install CocoaPods dependencies
+      - name: Update Bundle ID
         script: |
-          cd ios/App && pod install
-      - name: Build iOS app
+          sed -i '' "s/com.getcapacitor.myapp/$BUNDLE_ID/g" ios/App/App/Info.plist
+      - name: Install CocoaPods
+        script: |
+          cd ios/App && pod install --repo-update
+      - name: Build for simulator (test)
         script: |
           cd ios
           xcodebuild -workspace App.xcworkspace \
                      -scheme App \
                      -configuration Debug \
-                     -destination generic/platform=iOS \
-                     -archivePath App.xcarchive \
-                     archive
-      - name: Export IPA
-        script: |
-          cd ios
-          xcodebuild -exportArchive \
-                     -archivePath App.xcarchive \
-                     -exportPath ./build \
-                     -exportOptionsPlist ExportOptions.plist
+                     -destination 'platform=iOS Simulator,name=iPhone 14' \
+                     build
     artifacts:
-      - ios/build/*.ipa
-      - ios/*.xcarchive
+      - ios/build/Build/Products/**/*.app
     publishing:
       email:
         recipients:
-          - contact@startindev.zishop
+          - bahriwass@gmail.com
         notify:
           success: true
           failure: true

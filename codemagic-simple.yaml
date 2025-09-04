@@ -1,0 +1,47 @@
+workflows:
+  test-build:
+    name: Simple iOS Test Build
+    max_build_duration: 30
+    instance_type: mac_mini_m1
+    triggering:
+      events:
+        - push
+      branch_patterns:
+        - pattern: master
+          include: true
+    environment:
+      node: 18
+    scripts:
+      - name: Check environment
+        script: |
+          node --version
+          npm --version
+          echo "Working directory: $(pwd)"
+          ls -la
+      - name: Install dependencies
+        script: |
+          npm install
+      - name: Build web application
+        script: |
+          npm run build
+          echo "Build completed, checking dist folder:"
+          ls -la dist/
+      - name: Install Capacitor CLI
+        script: |
+          npm install -g @capacitor/cli@latest
+          npx cap --version
+      - name: Initialize iOS platform
+        script: |
+          npx cap add ios
+          echo "iOS platform added, checking structure:"
+          ls -la ios/
+    artifacts:
+      - dist/**
+      - ios/**
+    publishing:
+      email:
+        recipients:
+          - bahriwass@gmail.com
+        notify:
+          success: true
+          failure: true
