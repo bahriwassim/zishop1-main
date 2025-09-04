@@ -21,7 +21,7 @@ const API_CONFIG = {
     }
     
     // Fallback vers la production
-    return 'https://api.zishop.co/api';
+    return 'http://66.29.155.41:5000/api';
   })(),
   TIMEOUT: 10000,
   RETRY_ATTEMPTS: 3,

@@ -6,7 +6,7 @@ workflows:
     environment:
       ios_signing:
         distribution_type: app_store
-        bundle_identifier: com.ckizzy1.restexpress
+        bundle_identifier: com.startindev.zishop
       vars:
         XCODE_WORKSPACE: "ios/App.xcworkspace"
         XCODE_SCHEME: "App"
