@@ -30,7 +30,9 @@
       "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\server/**)",
       "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\server/**)",
       "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\dist/**)",
-      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\dist\\public/**)"
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\dist\\public/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\dist\\public/**)",
+      "Bash(cmd /c:*)"
     ],
     "deny": [],
     "ask": []
