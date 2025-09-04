@@ -1,7 +1,7 @@
 workflows:
   ios-zishop:
-    name: iOS ZiShop Build
-    max_build_duration: 60
+    name: ZiShop iOS Build
+    max_build_duration: 30
     instance_type: mac_mini_m1
     triggering:
       events:
@@ -12,46 +12,59 @@ workflows:
     environment:
       vars:
         BUNDLE_ID: com.startindev.zishop
-      node: 18
+      node: 20
       cocoapods: default
     scripts:
+      - name: Check Node version
+        script: |
+          node --version
+          npm --version
       - name: Install dependencies
         script: |
           npm install
-      - name: Build web app
+      - name: Build web application
         script: |
           npm run build
-      - name: Install Capacitor CLI
-        script: |
-          npm install -g @capacitor/cli@latest
-      - name: Update Capacitor to latest
+          echo "Web build completed:"
+          ls -la dist/public/
+      - name: Install latest Capacitor
         script: |
           npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/ios@latest
-      - name: Add iOS platform with proper deployment target
+          npx cap --version
+      - name: Add iOS platform
         script: |
           npx cap add ios
-          # Set minimum deployment target to iOS 13
-          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.0/IPHONEOS_DEPLOYMENT_TARGET = 13.0/' ios/App.xcodeproj/project.pbxproj
+          echo "iOS platform added:"
+          ls -la ios/
       - name: Sync Capacitor
         script: |
           npx cap sync ios
-      - name: Update Bundle ID
+      - name: Verify Xcode project
         script: |
-          sed -i '' "s/com.getcapacitor.myapp/$BUNDLE_ID/g" ios/App/App/Info.plist
-      - name: Update CocoaPods and install
+          ls -la ios/App/
+          if [ -f "ios/App.xcodeproj/project.pbxproj" ]; then
+            echo "Xcode project found!"
+            # Update deployment target
+            sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = [0-9]*\.[0-9]*/IPHONEOS_DEPLOYMENT_TARGET = 13.0/g' ios/App.xcodeproj/project.pbxproj
+          else
+            echo "Xcode project not found, checking workspace..."
+            ls -la ios/App/App.xcworkspace/
+          fi
+      - name: Install CocoaPods dependencies
         script: |
-          gem install cocoapods
-          cd ios/App && pod install --repo-update
-      - name: Build for simulator (test)
+          cd ios/App
+          pod install
+      - name: Test build (simulator)
         script: |
           cd ios
-          xcodebuild -workspace App.xcworkspace \
-                     -scheme App \
-                     -configuration Debug \
-                     -destination 'platform=iOS Simulator,name=iPhone 14' \
-                     build
+          if [ -f "App.xcworkspace" ]; then
+            xcodebuild -workspace App.xcworkspace -scheme App -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 14' build
+          else
+            xcodebuild -project App.xcodeproj -scheme App -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 14' build
+          fi
     artifacts:
-      - ios/build/Build/Products/**/*.app
+      - ios/**/*.app
+      - ios/**/*.xcarchive
     publishing:
       email:
         recipients:
