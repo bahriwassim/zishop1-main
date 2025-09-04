@@ -1,0 +1,39 @@
+name: Build iOS App
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, master ]
+    
+jobs:
+  build-ios:
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Build web app
+      run: npm run build
+      
+    - name: Setup iOS
+      run: npx cap sync ios
+      
+    - name: Build iOS Archive
+      run: |
+        cd ios
+        xcodebuild -workspace App.xcworkspace -scheme App archive -archivePath App.xcarchive
+        
+    - name: Upload Archive
+      uses: actions/upload-artifact@v4
+      with:
+        name: ios-app-archive
+        path: ios/App.xcarchive

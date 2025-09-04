@@ -108,3 +108,5 @@ await fetch('/api/merchants')  // Test direct des endpoints
 *Diagnostic créé le : $(Get-Date)*
 *Prochaine action : Tester le composant DebugAPI dans le navigateur*
 
+
+

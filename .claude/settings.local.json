@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\android\\app\\src\\test\\java\\com\\getcapacitor\\myapp/**)",
+      "Bash(npm run check:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run dev:*)",
+      "Bash(timeout 5 npm run dev)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\client\\src\\components/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\client\\src\\components/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\client\\src\\components/**)",
+      "Bash(curl:*)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\server/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main\\server/**)",
+      "Bash(npm run mobile:build:web:*)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main/**)",
+      "Bash(npm install:*)",
+      "Bash(eas:*)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main/**)",
+      "Read(/D:\\zishop 20-8\\zishop1-main\\zishop1-main/**)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

@@ -1,9 +1,21 @@
 {
   "expo": {
+    "name": "ZiShop",
+    "slug": "zishop",
+    "version": "1.0.0",
+    "platforms": ["ios", "android"],
     "extra": {
       "eas": {
         "projectId": "b71fd963-130f-4efb-879c-ac65a7fd5359"
       }
-    }
+    },
+    "ios": {
+      "bundleIdentifier": "com.ckizzy1.restexpress",
+      "buildNumber": "1",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "plugins": []
   }
 }

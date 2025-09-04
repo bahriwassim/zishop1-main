@@ -1,5 +1,5 @@
 {
-  "currentId": 44,
+  "currentId": 50,
   "hotels": [
     {
       "id": 1,
@@ -493,6 +493,18 @@
       "role": "merchant",
       "entityId": 5,
       "id": 32
+    },
+    {
+      "username": "adminZishop",
+      "password": "9xmULv8J5qgO",
+      "role": "merchant",
+      "entityId": 5,
+      "id": 48,
+      "entity_id": null,
+      "supabase_user_id": null,
+      "is_active": true,
+      "created_at": "2025-08-20T06:25:44.094Z",
+      "updated_at": "2025-08-20T06:25:44.094Z"
     }
   ],
   "clients": [
@@ -528,6 +540,18 @@
       "has_completed_tutorial": false,
       "created_at": "2025-08-20T02:32:49.796Z",
       "updated_at": "2025-08-20T02:32:49.796Z"
+    },
+    {
+      "id": 49,
+      "email": "test@test.com",
+      "password": "test@test.com",
+      "first_name": "tese",
+      "last_name": "test",
+      "phone": "05 25 36 58 23",
+      "is_active": true,
+      "has_completed_tutorial": false,
+      "created_at": "2025-08-20T06:32:51.309Z",
+      "updated_at": "2025-08-20T06:32:51.309Z"
     }
   ],
   "hotel_merchants": [
@@ -602,7 +626,31 @@
       "isActive": true,
       "createdAt": "2025-08-13T10:29:25.870Z",
       "updatedAt": "2025-08-13T10:29:25.870Z"
+    },
+    {
+      "id": 44,
+      "is_active": true,
+      "created_at": "2025-08-20T05:52:42.049Z",
+      "updated_at": "2025-08-20T05:52:42.049Z"
+    },
+    {
+      "id": 45,
+      "is_active": true,
+      "created_at": "2025-08-20T05:52:42.416Z",
+      "updated_at": "2025-08-20T05:52:42.416Z"
+    },
+    {
+      "id": 46,
+      "is_active": true,
+      "created_at": "2025-08-20T05:52:43.097Z",
+      "updated_at": "2025-08-20T05:52:43.097Z"
+    },
+    {
+      "id": 47,
+      "is_active": true,
+      "created_at": "2025-08-20T06:20:02.461Z",
+      "updated_at": "2025-08-20T06:20:02.461Z"
     }
   ],
-  "savedAt": "2025-08-20T02:32:49.828Z"
+  "savedAt": "2025-08-20T06:32:51.309Z"
 }

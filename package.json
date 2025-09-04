@@ -21,7 +21,9 @@
     "mobile:build:web": "vite build",
     "mobile:sync": "npx cap sync",
     "mobile:android": "npx cap sync android && npx cap open android",
-    "mobile:ios": "npx cap sync ios && npx cap open ios"
+    "mobile:ios": "npx cap sync ios && npx cap open ios",
+    "mobile:build:ios": "npm run build && npx cap sync ios && npx cap build ios",
+    "mobile:build:android": "npm run build && npx cap sync android && npx cap build android"
   },
   "dependencies": {
     "@capacitor/android": "^7.4.2",

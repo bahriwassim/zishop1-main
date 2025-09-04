@@ -1,0 +1,50 @@
+{
+  "build": {
+    "web": {
+      "outputDir": "dist/public",
+      "assetsDir": "assets",
+      "indexHtml": "index.html"
+    },
+    "ios": {
+      "bundleId": "com.ckizzy1.restexpress",
+      "appName": "ZiShop",
+      "version": "1.0.0",
+      "buildNumber": "1",
+      "teamId": "",
+      "provisioningProfile": "",
+      "certificate": ""
+    },
+    "android": {
+      "packageName": "com.ckizzy1.restexpress",
+      "appName": "ZiShop",
+      "versionCode": 1,
+      "versionName": "1.0.0",
+      "minSdkVersion": 22,
+      "targetSdkVersion": 33,
+      "compileSdkVersion": 33
+    }
+  },
+  "capacitor": {
+    "ios": {
+      "scheme": "zishop",
+      "deploymentTarget": "13.0"
+    },
+    "android": {
+      "scheme": "zishop",
+      "allowBackup": true,
+      "usesCleartextTraffic": true
+    }
+  },
+  "environment": {
+    "development": {
+      "apiUrl": "http://localhost:5000/api",
+      "debug": true
+    },
+    "production": {
+      "apiUrl": "https://api.zishop.co/api",
+      "debug": false
+    }
+  }
+}
+
+
