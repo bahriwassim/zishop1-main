@@ -13,13 +13,18 @@ const PORT = parseInt(process.env.PORT || "5000");
 
 const app = express();
 
-// Configuration de sécurité avec Helmet - Mode permissif pour production HTTP
-app.use(helmet({
-  contentSecurityPolicy: false, // Désactiver CSP pour éviter les erreurs SSL
-  crossOriginOpenerPolicy: false, // Désactiver COOP 
-  crossOriginEmbedderPolicy: false,
-  crossOriginResourcePolicy: false,
-}));
+// Mode production sans Helmet - Élimine TOUS les headers SSL problématiques
+if (process.env.NODE_ENV === 'production') {
+  console.log('🔧 Mode production: Headers sécurité désactivés pour compatibilité HTTP');
+} else {
+  // Helmet minimal seulement en développement
+  app.use(helmet({
+    contentSecurityPolicy: false,
+    crossOriginOpenerPolicy: false,
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+  }));
+}
 
 // Configuration CORS sécurisée
 const corsOptions = {
