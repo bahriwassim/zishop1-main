@@ -5,15 +5,15 @@ const config: CapacitorConfig = {
   appName: 'ZiShop',
   webDir: 'dist/public',
   server: {
-    androidScheme: 'https',
-    url: 'http://66.29.155.41:5000',
-    cleartext: true
+    androidScheme: 'https'
   },
   ios: {
-    scheme: 'zishop'
+    scheme: 'zishop',
+    minVersion: '13.0'
   },
   android: {
-    scheme: 'zishop'
+    scheme: 'zishop',
+    minSdkVersion: 22
   }
 };
 

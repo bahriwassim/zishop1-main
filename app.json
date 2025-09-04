@@ -1,9 +1,17 @@
 {
   "expo": {
     "name": "ZiShop",
-    "slug": "zishop",
+    "slug": "rest-express",
     "version": "1.0.0",
     "platforms": ["ios", "android"],
+    "orientation": "portrait",
+    "icon": "./client/src/assets/images/logos/icon-primary.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./client/src/assets/images/logos/logo-primary.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
     "extra": {
       "eas": {
         "projectId": "b71fd963-130f-4efb-879c-ac65a7fd5359"
@@ -12,6 +20,7 @@
     "ios": {
       "bundleIdentifier": "com.startindev.zishop",
       "buildNumber": "1",
+      "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false,
         "NSAppTransportSecurity": {
@@ -25,6 +34,9 @@
         }
       }
     },
-    "plugins": []
+    "plugins": [],
+    "web": {
+      "bundler": "metro"
+    }
   }
 }

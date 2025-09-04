@@ -24,17 +24,23 @@ workflows:
       - name: Install Capacitor CLI
         script: |
           npm install -g @capacitor/cli@latest
-      - name: Add iOS platform
+      - name: Update Capacitor to latest
+        script: |
+          npm install @capacitor/core@latest @capacitor/cli@latest @capacitor/ios@latest
+      - name: Add iOS platform with proper deployment target
         script: |
           npx cap add ios
+          # Set minimum deployment target to iOS 13
+          sed -i '' 's/IPHONEOS_DEPLOYMENT_TARGET = 11.0/IPHONEOS_DEPLOYMENT_TARGET = 13.0/' ios/App.xcodeproj/project.pbxproj
       - name: Sync Capacitor
         script: |
           npx cap sync ios
       - name: Update Bundle ID
         script: |
           sed -i '' "s/com.getcapacitor.myapp/$BUNDLE_ID/g" ios/App/App/Info.plist
-      - name: Install CocoaPods
+      - name: Update CocoaPods and install
         script: |
+          gem install cocoapods
           cd ios/App && pod install --repo-update
       - name: Build for simulator (test)
         script: |
